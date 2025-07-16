@@ -1367,7 +1367,7 @@ async def get_manifest_json():
     return {
         "name": app.state.WEBUI_NAME,
         "short_name": app.state.WEBUI_NAME,
-        "description": "Spectra Light is an open, extensible, user-friendly interface for AI that adapts to your workflow.",
+        "description": "Spectra Lite is an open, extensible, user-friendly interface for AI that adapts to your workflow.",
         "start_url": "/",
         "display": "standalone",
         "background_color": "#343541",
@@ -1396,7 +1396,7 @@ async def get_opensearch_xml():
     <ShortName>{app.state.WEBUI_NAME}</ShortName>
     <Description>Search {app.state.WEBUI_NAME}</Description>
     <InputEncoding>UTF-8</InputEncoding>
-    <Image width="16" height="16" type="image/x-icon">{app.state.config.WEBUI_URL}/static/favicon.png</Image>
+    <Image width="16" height="16" type="image/x-icon">{app.state.config.WEBUI_URL}/static/logo.svg</Image>
     <Url type="text/html" method="get" template="{app.state.config.WEBUI_URL}/?q={"{searchTerms}"}"/>
     <moz:SearchForm>{app.state.config.WEBUI_URL}</moz:SearchForm>
     </OpenSearchDescription>
@@ -1425,7 +1425,7 @@ def swagger_ui_html(*args, **kwargs):
         **kwargs,
         swagger_js_url="/static/swagger-ui/swagger-ui-bundle.js",
         swagger_css_url="/static/swagger-ui/swagger-ui.css",
-        swagger_favicon_url="/static/swagger-ui/favicon.png",
+        swagger_favicon_url="/static/swagger-ui/logo.svg",
     )
 
 

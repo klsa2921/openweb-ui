@@ -9,46 +9,47 @@ services:
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
     networks:
       - app-network 
-
+    
+    
   open-webui:
     build:
+      
       context: .
       args:
         OLLAMA_BASE_URL: '/ollama'
       dockerfile: Dockerfile
+    #image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
     container_name: open-webui
     mem_limit: 4g
     volumes:
       - ./data:/app/backend/data
       - ./pipelines:/app/pipelines
+    #depends_on:
+    #  - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3006}:8080
+      - ${OPEN_WEBUI_PORT-3006}:8080   
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=
-      - PIPELINES_BASE_URL=http://open-webui-pipelines:9099
-      - USE_DB_ENV_VARIABLES=false
+      - 'OLLAMA_BASE_URL=http://ollama:11434'      
+      - 'WEBUI_SECRET_KEY='
+      - 'PIPELINES_BASE_URL=http://open-webui-pipelines:9099'
+    #extra_hosts:
+    #  - host.docker.internal:host-gateway
     restart: unless-stopped
-    extra_hosts:
-      - host.docker.internal:host-gateway
     networks:
       - app-network   
-
-  open-webui-pipelines:
+      
+  open-webui_pipelines:
     image: ghcr.io/open-webui/pipelines:main
     container_name: open-webui-pipelines
     volumes:
       - ./pipelines:/app/pipelines
-      - ./requirements-pipeline.txt:/app/requirements.txt
     ports:
       - ${OPEN_WEBUI_PIPELINE_PORT-9099}:9099
+
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      #- PIPELINES_URLS=https://github.com/open-webui/pipelines/archive/refs/heads/main.zip
-      - PIPELINES_REQUIREMENTS_PATH=/app/requirements.txt
+      - OLLAMA_BASE_URL:"http://ollama:11434"
+      - PIPELINES_URLS:"https://github.com/open-webui/pipelines/archive/refs/heads/main.zip"
     restart: unless-stopped 
-    extra_hosts:
-      - host.docker.internal:host-gateway
     networks:
       - app-network    
 
@@ -56,7 +57,6 @@ networks:
   app-network:
     driver: bridge
     external: true
-
 volumes:
   ollama: {}
   open-webui: {}

@@ -208,13 +208,12 @@ class PersistentConfig(Generic[T]):
         self.config_path = config_path
         self.env_value = env_value
         self.config_value = get_config_value(config_path)
-        if self.env_value is not None:
-            log.info(f"'{env_name}' loaded from .env {env_value}")
-            self.value = self.env_value
-        else:
+        if self.config_value is not None:
             log.info(f"'{env_name}' loaded from the latest database entry")
             log.info(f"'{env_name}' from database {self.config_value}")
             self.value = self.config_value
+        else:
+            self.value = env_value
 
         PERSISTENT_CONFIG_REGISTRY.append(self)
 
@@ -1198,8 +1197,6 @@ except Exception as e:
 WEBUI_BANNERS = PersistentConfig("WEBUI_BANNERS", "ui.banners", banners)
 
 
-
-
 SHOW_ADMIN_DETAILS = PersistentConfig(
     "SHOW_ADMIN_DETAILS",
     "auth.admin.show",
@@ -1475,8 +1472,6 @@ ENABLE_CODE_EXECUTION = PersistentConfig(
     "code_execution.enable",
     os.environ.get("ENABLE_CODE_EXECUTION", "True").lower() == "true",
 )
-
-
 
 CODE_EXECUTION_ENGINE = PersistentConfig(
     "CODE_EXECUTION_ENGINE",

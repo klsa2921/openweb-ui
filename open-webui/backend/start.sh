@@ -3,6 +3,12 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR" || exit
 
+if [ -f "$SCRIPT_DIR/.env" ]; then
+  echo "Loading environment variables from .env"
+  export $(grep -v '^#' "$SCRIPT_DIR/.env" | xargs)
+fi
+
+
 # Add conditional Playwright browser installation
 if [[ "${RAG_WEB_LOADER_ENGINE,,}" == "playwright" ]]; then
     if [[ -z "${PLAYWRIGHT_WS_URI}" ]]; then

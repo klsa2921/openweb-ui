@@ -105,12 +105,12 @@ for source in log_sources:
 
 log.setLevel(SRC_LOG_LEVELS["CONFIG"])
 
-WEBUI_NAME = os.environ.get("WEBUI_NAME", "Spectra Light")
-#if WEBUI_NAME != "Spectra Light":
-    #WEBUI_NAME += " (Spectra Light)"
+WEBUI_NAME = os.environ.get("WEBUI_NAME", "Spectra Lite")
+#if WEBUI_NAME != "Spectra Lite":
+    #WEBUI_NAME += " (Spectra Lite)"
 
-#WEBUI_FAVICON_URL = "https://openwebui.com/favicon.png"
-WEBUI_FAVICON_URL = "http://127.0.0.1/favicon.png"
+#WEBUI_FAVICON_URL = "https://openwebui.com/logo.svg"
+WEBUI_FAVICON_URL = "http://127.0.0.1/logo.svg"
 
 TRUSTED_SIGNATURE_KEY = os.environ.get("TRUSTED_SIGNATURE_KEY", "")
 

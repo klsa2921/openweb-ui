@@ -19,6 +19,7 @@ RUN npm ci
 
 COPY . .
 ENV APP_BUILD_HASH=${BUILD_HASH}
+ENV NODE_OPTIONS=--max-old-space-size=4096
 RUN npm run build
 
 ######## WebUI backend ########
@@ -80,6 +81,8 @@ COPY --chown=$UID:$GID --from=build /app/package.json /app/package.json
 
 # Copy backend files
 COPY --chown=$UID:$GID ./backend .
+COPY --chown=0:0 .env /app/backend/.env
+
 
 EXPOSE 8080
 
