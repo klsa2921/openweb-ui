@@ -1,3 +1,4 @@
+ cat .env
 # Ollama URL for the backend to connect
 # The path '/ollama' will be redirected to the specified backend URL
 OLLAMA_BASE_URL='http://ollama:11434'
@@ -19,4 +20,9 @@ USER_PERMISSIONS_FEATURES_CODE_INTERPRETER=False
 ENABLE_WHISPER=false
 ENABLE_TTS=false
 ENABLE_CODE_EXECUTION=False
+SHOW_ADMIN_DETAILS=False
+ENABLE_WHISPER=false
+DEFAULT_USER_ROLE=user
+OAUTH_ALLOWED_ROLES=['user']
+OAUTH_ADMIN_ROLES=[]
 
